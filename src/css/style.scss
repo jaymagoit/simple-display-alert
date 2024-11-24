@@ -74,9 +74,6 @@
     background: transparent;
     transition: background-color 0.3s ease-in-out;
 }
-#simple-display-alert.has-backdrop {
-    right: 0px;
-}
 #simple-display-alert.has-backdrop::before {
     content: " ";
     position: fixed;

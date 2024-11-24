@@ -1,5 +1,5 @@
 import { delay, isDisplayAlertObject, joinStrings } from './helpers';
-import { ALERT_POSITIONS, DisplayAlertProps } from './types';
+import { ALERT_POSITIONS, DisplayAlertProps, DisplayAlertReturnProps } from './types';
 
 declare global {
     interface Window {
@@ -92,7 +92,7 @@ export function displayAlert(
     variant: DisplayAlertProps['variant'] | DisplayAlertProps = 'primary',
     message?: string | DisplayAlertProps,
     props: DisplayAlertProps | number = {}
-): any {
+): DisplayAlertReturnProps {
     if (isDisplayAlertObject(variant)) {
         // ex. showAlert({ variant: 'success', message: 'Thanks!' })
         props = variant
@@ -115,16 +115,16 @@ export function displayAlert(
         }
     }
 
+    const alertPosition = props.position ?? 'bottom-right';
+    const parentSelector = `#${config.parentId}.${alertPosition}`;
+
     // Create the parent div.
-    const alertApp = document.getElementById(config.parentId)
+    const alertApp = document.querySelector(parentSelector)
     if (!alertApp) {
         const div = document.createElement('div')
         div.id = config.parentId
         div.classList.add(props.position ?? 'bottom-right');
         document.body.append(div)
-    } else {
-        alertApp.classList.remove(...ALERT_POSITIONS);
-        alertApp.classList.add(props.position ?? 'bottom-right');
     }
 
     let _className = props.className || ''
@@ -149,11 +149,11 @@ export function displayAlert(
         }
     }
 
-    const alertDiv: any = document.getElementById(config.parentId);
+    const alertDiv: any = document.querySelector(parentSelector);
     const alert: any = createAlertElement(_variant, _message, _className, props)
 
     // Remove existing alerts.
-    removeResponseAlert(_className)
+    removeResponseAlert(_className, false, alertPosition)
 
     // Clear old timer for destoying alert.
     clearAlertTimeout(_className)
@@ -174,13 +174,13 @@ export function displayAlert(
     if (timeout > 0) {
         const timerKey = _className ? _className : 0
         window.alertTimer[timerKey] = delay(() => {
-            removeResponseAlert(_className, true)
+            removeResponseAlert(_className, true, alertPosition)
         }, timeout)
     }
 
     return {
         remove: () => {
-            removeResponseAlert(_className, true)
+            removeResponseAlert(_className, true, alertPosition)
         }
     }
 }
@@ -219,9 +219,9 @@ function clearAlertTimeout(_class?: string): void {
 export function removeResponseAlert(
     _className?: string,
     _isFade?: boolean | number,
-    _isAll?: boolean | number
+    _position?: string
 ): void {
-    const alertDiv: any = document.getElementById(config.parentId);
+    const alertDiv: any = document.querySelector(`#${config.parentId}${_position ? `.${_position}` : ''}`);
     // Get all alerts with no identifier or className.
     let alerts: any = alertDiv?.querySelectorAll(
         '.alert-response-all:not(.has-identifier)'
@@ -231,10 +231,6 @@ export function removeResponseAlert(
     if (_className && _className.length) {
         // override alerts with specific class identifier.
         alerts = alertDiv.querySelectorAll('.' + _className)
-    }
-
-    if (_isAll) {
-        alerts = alertDiv.querySelectorAll('.alert-response-all')
     }
 
     // Reset timer variable if there is no existing alert.
@@ -278,16 +274,6 @@ export function removeDisplayAlert(
     isFade?: boolean | number
 ): void {
     removeResponseAlert(className, isFade)
-}
-
-/**
- * This extends the `removeResponseAlert()`
- * Remove ALL display alert.
- *
- * @return {void}
- */
-export function clearDisplayAlert(): void {
-    removeResponseAlert('', false, 1)
 }
 
 /**
@@ -336,21 +322,6 @@ function responseStatusCode(response: any): number {
 }
 
 /**
- * Check if response has error.
- *
- * @param {mixed} response Reponse object.
- * @returns {boolean}
- */
-function hasError(response: any): boolean {
-    response = response || {}
-    if (response.response && response.response.status !== 200) {
-        return true
-    }
-
-    return false
-}
-
-/**
  * @var {any} timer
  */
 let timer: any
@@ -376,30 +347,6 @@ export function getErrorMessage(error: any, _default?: string) {
  */
 export function getStatusCode(response: any) {
     return responseStatusCode(response)
-}
-
-/**
- * Display alert loader with backdrop.
- *
- * @param {string} message The loading message.
- * @param {DisplayAlertProps} variant Alert style.
- * @param {boolean} backdrop Has backdrop
- * @return {void}
- */
-export function displayAlertLoader(
-    message?: string,
-    variant: DisplayAlertProps['variant'] = 'white',
-    backdrop = true,
-    props: DisplayAlertProps = {}
-): void {
-    displayAlert(variant || 'light', {
-        message: message ? `${message}<span class="dot-load" />` : 'Loading information. Please wait<span class="dot-load"></span>',
-        icon: 'loader',
-        timeout: -1,
-        closeBtn: false,
-        backdrop,
-        ...props,
-    })
 }
 
 /**
@@ -432,6 +379,27 @@ export function displayErrors(errors?: Array<any>): void {
 }
 
 /**
+ * Display alert loader with backdrop.
+ *
+ * @param {string} message The loading message.
+ * @param {DisplayAlertProps} props Has backdrop
+ * @return {DisplayAlertReturnProps}
+ */
+export function displayAlertLoader(
+    message?: string,
+    props: DisplayAlertProps = {}
+): DisplayAlertReturnProps {
+    return displayAlert(props.variant || 'light', {
+        message: message ? `${message}<span class="dot-load" />` : 'Loading information. Please wait<span class="dot-load"></span>',
+        ...props,
+        icon: 'loader',
+        timeout: 0,
+        closeBtn: props.closeBtn ?? false,
+        backdrop: props.backdrop ?? true,
+    })
+}
+
+/**
  * Extend DisplayAlert for error alert.
  * Indicate a className or set `multiple: true` for multiple alert.
  * Example usage:
@@ -446,7 +414,7 @@ export function displayErrors(errors?: Array<any>): void {
 export function displayAlertError(
     message?: string | DisplayAlertProps,
     props: DisplayAlertProps | number = {}
-): void {
+): DisplayAlertReturnProps {
     return displayAlert('danger', message, props)
 }
 
@@ -465,7 +433,7 @@ export function displayAlertError(
 export function displayAlertSuccess(
     message?: string | DisplayAlertProps,
     props: DisplayAlertProps | number = {}
-): void {
+): DisplayAlertReturnProps {
     return displayAlert('success', message, props)
 }
 
@@ -484,7 +452,7 @@ export function displayAlertSuccess(
 export function displayAlertWarning(
     message?: string | DisplayAlertProps,
     props: DisplayAlertProps | number = {}
-): void {
+): DisplayAlertReturnProps {
     return displayAlert('warning', message, props)
 }
 
@@ -503,6 +471,6 @@ export function displayAlertWarning(
 export function displayAlertInfo(
     message?: string | DisplayAlertProps,
     props: DisplayAlertProps | number = {}
-): void {
+): DisplayAlertReturnProps {
     return displayAlert('info', message, props)
 }

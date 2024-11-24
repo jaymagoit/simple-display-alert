@@ -3,29 +3,29 @@ import { displayAlert, displayAlertError, displayAlertInfo, displayAlertLoader, 
 // Basic Alerts
 window.showSuccessAlert = () => {
     return displayAlertSuccess('Operation completed successfully!', {
-        fadeDirection: 'left',
-        className: 'bottom-right'
+        fadeDirection: 'none',
+        position: 'bottom-right'
     });
 };
 
 window.showErrorAlert = () => {
     return displayAlertError('An error occurred while processing your request.', {
         fadeDirection: 'right',
-        className: 'bottom-right'
+        position: 'bottom-right'
     });
 };
 
 window.showWarningAlert = () => {
     return displayAlertWarning('Please review your input before proceeding.', {
         fadeDirection: 'bottom',
-        className: 'bottom-right'
+        position: 'bottom-right'
     });
 };
 
 window.showInfoAlert = () => {
     return displayAlertInfo('This is an informational message.', {
         fadeDirection: 'top',
-        className: 'bottom-right'
+        position: 'bottom-right'
     });
 };
 
@@ -114,7 +114,7 @@ window.showStackedAlerts = () => {
     displayAlert({
         variant: 'warning',
         message: 'This is the second alert',
-        position: 'bottom-right',
+        position: 'bottom-left',
         fadeDirection: 'right',
         multiple: true,
         timeout: 0
@@ -123,7 +123,7 @@ window.showStackedAlerts = () => {
     displayAlert({
         variant: 'info',
         message: 'This is the third alert',
-        position: 'bottom-right',
+        position: 'top-right',
         fadeDirection: 'left',
         multiple: true,
         timeout: 0
@@ -132,7 +132,7 @@ window.showStackedAlerts = () => {
     displayAlert({
         variant: 'error',
         message: 'This is the fourth alert',
-        position: 'bottom-right',
+        position: 'top-left',
         fadeDirection: 'top',
         multiple: true,
         timeout: 0
@@ -144,8 +144,8 @@ window.showOneForMultipleAlerts = () => {
     displayAlert({
         variant: ['success', 'info', 'warning', 'error'][Math.floor(Math.random() * 4)],
         message: 'This is the first alert',
-        position: 'bottom-left',
-        fadeDirection: 'bottom',
+        position: 'bottom-right',
+        fadeDirection: ['left', 'bottom', 'right', 'top', 'none'][Math.floor(Math.random() * 4)],
         multiple: true,
         timeout: 0
     });
@@ -153,9 +153,9 @@ window.showOneForMultipleAlerts = () => {
 
 // Special Alerts
 window.showLoaderAlert = () => {
-    return displayAlertLoader('Processing your request...', {
-        className: 'bottom-right',
-        timeout: 3000
+    return displayAlertLoader('Processing your request. reload the page to cancel', {
+        position: 'bottom-right',
+        closeBtn: false
     });
 };
 
@@ -164,7 +164,7 @@ window.showAlertWithBackdrop = () => {
         variant: 'white',
         message: 'This alert has a backdrop effect',
         icon: 'info',
-        className: 'bottom-right',
+        position: 'bottom-right',
         backdrop: true,
         timeout: 0
     });

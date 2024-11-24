@@ -64,3 +64,7 @@ export interface DisplayAlertProps {
      */
     position?: AlertPosition;
 }
+
+export interface DisplayAlertReturnProps {
+    remove: () => void;
+}
