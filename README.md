@@ -5,7 +5,7 @@ A lightweight, customizable alert system for web applications.
 ## Installation
 
 ```bash
-npm install simple-display-alert
+npm install @jaymagoit/simple-display-alert
 ```
 
 ## Features
