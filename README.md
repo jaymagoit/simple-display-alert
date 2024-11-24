@@ -156,6 +156,49 @@ removeResponseAlert();
 - White/neutral alerts for general messages
 - Backdrop alerts for modal-like messages
 
+## Icon Options
+
+Each alert type comes with a default icon, but you can customize it using the `icon` property:
+
+```ts
+// Available icon options
+type AlertIcon = 'success' | 'danger' | 'warning' | 'info' | 'loader';
+
+// Examples
+displayAlert({
+    variant: 'white',
+    message: 'Custom success icon',
+    icon: 'success'
+});
+
+displayAlert({
+    variant: 'white',
+    message: 'Custom warning icon',
+    icon: 'warning'
+});
+
+// Loader icon with custom message
+displayAlert({
+    variant: 'white',
+    message: 'Processing...',
+    icon: 'loader'
+});
+
+// No icon
+displayAlert({
+    variant: 'info',
+    message: 'Message without icon',
+    icon: undefined
+});
+```
+
+Default icon mappings:
+- `success` - Checkmark icon (✓)
+- `danger/error` - X icon (×)
+- `warning` - Exclamation mark (!)
+- `info` - Information icon (i)
+- `loader` - Animated spinner
+
 ## Position Options
 
 - `top-left`
