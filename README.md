@@ -215,7 +215,7 @@ Default icon mappings:
 | timeout | number | 5000 | Time in ms before alert auto-hides (0 for no auto-hide) |
 | position | string | 'bottom-right' | Alert position on screen |
 | fadeDirection | string | 'none' | Direction of fade animation |
-| icon | string | - | Icon type to display |
+| icon | string | variant default | Icon type to display ('success', 'danger', 'warning', 'info', 'loader'). Each variant has a default icon, but you can override it or set to undefined for no icon |
 | closeBtn | boolean | true | Show/hide close button |
 | multiple | boolean | false | Allow multiple alerts |
 | backdrop | boolean | false | Show backdrop behind alert |
