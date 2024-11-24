@@ -1,5 +1,5 @@
 {
-  "name": "@jaymagoit/simple-display-alert",
+  "name": "@jaymago/simple-display-alert",
   "version": "1.0.0",
   "description": "A lightweight, customizable alert system for web applications",
   "main": "dist/index.js",
@@ -10,10 +10,12 @@
   ],
   "scripts": {
     "build": "tsup",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "alert",
