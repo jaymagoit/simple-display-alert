@@ -1,7 +1,7 @@
 {
   "name": "@jaymago/simple-display-alert",
   "version": "1.0.0",
-  "description": "A lightweight, customizable alert system for web applications",
+  "description": "A lightweight, customizable alert system for web applications with TypeScript support",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -24,9 +24,22 @@
     "popup",
     "message",
     "ui",
-    "typescript"
+    "typescript",
+    "javascript",
+    "web",
+    "frontend",
+    "notifications",
+    "alerts",
+    "toasts",
+    "messages",
+    "display-alert",
+    "simple-alert"
   ],
-  "author": "Jay Mago",
+  "author": {
+    "name": "Jay Mago",
+    "email": "jaymago.it@gmail.com",
+    "url": "https://github.com/jaymagoit"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
