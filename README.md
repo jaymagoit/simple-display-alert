@@ -2,6 +2,9 @@
 
 A lightweight, customizable alert system for web applications.
 
+## Interactive Demo
+> 🚀 **[Live Demo](https://jaymagoit.github.io/simple-display-alert)** - Try it out now!
+
 ## Installation
 
 ```bash
