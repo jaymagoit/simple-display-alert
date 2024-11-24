@@ -1,0 +1,21 @@
+{
+    "name": "Simple Display Alert",
+    "short_name": "SDA",
+    "description": "A lightweight, customizable alert system for modern web applications",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a192f",
+    "theme_color": "#0a192f",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
