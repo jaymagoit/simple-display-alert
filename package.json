@@ -1,0 +1,37 @@
+{
+  "name": "@jaymagoit/simple-display-alert",
+  "version": "1.0.0",
+  "description": "Simple pop-up alert box to notify users with a specified message.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaymagoit/simple-display-alert.git"
+  },
+  "keywords": [
+    "alert",
+    "popup",
+    "notification",
+    "simple",
+    "alert",
+    "notify",
+    "popu-up",
+    "javascript",
+    "alert"
+  ],
+  "author": "Denmark Jay Mago",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaymagoit/simple-display-alert/issues"
+  },
+  "homepage": "https://github.com/jaymagoit/simple-display-alert#readme",
+  "devDependencies": {
+    "esbuild-sass-plugin": "^3.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  }
+}

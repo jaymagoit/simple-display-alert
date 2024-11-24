@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Display Alert - Beautiful, Customizable Alert System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <style>
+        :root {
+            --primary-color: #178344;
+            --danger-color: #8f130c;
+            --warning-color: #8a5700;
+            --info-color: #026c81;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #444;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9ecef;
+        }
+
+        button {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .success-btn { border-color: var(--primary-color); color: var(--primary-color); }
+        .error-btn { border-color: var(--danger-color); color: var(--danger-color); }
+        .warning-btn { border-color: var(--warning-color); color: var(--warning-color); }
+        .info-btn { border-color: var(--info-color); color: var(--info-color); }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Simple Display Alert</h1>
+        <p>A lightweight, customizable alert system for modern web applications</p>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>Installation</h2>
+            <div class="code-block">
+                <pre><code class="language-bash">npm install simple-display-alert</code></pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Basic Usage</h2>
+            <div class="code-block">
+                <pre><code class="language-javascript">import { 
+    displayAlert, 
+    displayAlertSuccess, 
+    displayAlertError, 
+    displayAlertWarning, 
+    displayAlertInfo,
+    displayAlertLoader
+} from 'simple-display-alert';
+
+// Using specific alert functions
+displayAlertSuccess('Operation completed successfully!');
+displayAlertError('An error occurred!');
+displayAlertWarning('Please check your input');
+displayAlertInfo('This is an informational message');
+displayAlertLoader('Loading...');
+
+// Using specific alert functions with options
+displayAlertSuccess('Success with options', { position: 'top-right', fadeDirection: 'left' });
+displayAlertError('Error with options', { timeout: 0, multiple: true });
+displayAlertWarning('Warning with options', { position: 'bottom-left', fadeDirection: 'bottom' });
+displayAlertInfo('Info with options', { timeout: 3000, multiple: true });
+displayAlertLoader('Loading with options', { position: 'top-right', timeout: 2000 });
+
+// With options
+displayAlertSuccess({
+    message: 'Operation completed successfully!',
+    timeout: 5000,
+    position: 'top-right',
+    fadeDirection: 'left'
+});
+
+// Using generic displayAlert
+displayAlert({
+    variant: 'success', // 'success' | 'error' | 'warning' | 'info' | 'white' | 'loader'
+    message: 'Your message here',
+    timeout: 5000,      // 0 for no auto-hide
+    position: 'bottom-right', // 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+    fadeDirection: 'left', // 'left' | 'right' | 'top' | 'bottom'
+    icon: 'success',    // 'success' | 'danger' | 'warning' | 'info' | 'loader'
+    closeBtn: true,     // show/hide close button
+    multiple: false     // allow multiple alerts
+});
+
+// Hiding alerts programmatically
+// Method 1: Store the alert reference
+const alert = displayAlert({
+    variant: 'info',
+    message: 'This alert can be hidden programmatically',
+    timeout: 0
+});
+// Later, hide it using:
+alert.remove();
+
+// Method 2: Remove alerts by position
+// Import the removal function
+import { removeResponseAlert } from 'simple-display-alert';
+
+// Remove all alerts in all positions
+removeResponseAlert(); // Removes all alerts from the page</code></pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Interactive Demo</h2>
+            
+            <div class="demo-grid">
+                <div class="demo-section">
+                    <h3>Basic Alerts</h3>
+                    <button class="success-btn" onclick="showSuccessAlert()">Success Alert</button>
+                    <button class="error-btn" onclick="showErrorAlert()">Error Alert</button>
+                    <button class="warning-btn" onclick="showWarningAlert()">Warning Alert</button>
+                    <button class="info-btn" onclick="showInfoAlert()">Info Alert</button>
+                </div>
+
+                <div class="demo-section">
+                    <h3>Special Alerts</h3>
+                    <button onclick="showLoaderAlert()">Loading Alert</button>
+                    <button onclick="showAlertWithBackdrop()">Alert with Backdrop</button>
+                </div>
+
+                <div class="demo-section">
+                    <h3>Position Variants</h3>
+                    <button onclick="showTopLeftAlert()">Top Left</button>
+                    <button onclick="showTopRightAlert()">Top Right</button>
+                    <button onclick="showBottomLeftAlert()">Bottom Left</button>
+                    <button onclick="showBottomRightAlert()">Bottom Right</button>
+                </div>
+
+                <div class="demo-section">
+                    <h3>Multiple Alerts</h3>
+                    <button onclick="showMultipleAlerts()">Stack Same Position</button>
+                    <button onclick="showStackedAlerts()">Stack Different Positions</button>
+                    <button onclick="showOneForMultipleAlerts()">Show One for Multiple</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Features</h2>
+            <ul style="list-style: none; margin: 1rem 0;">
+                <li>✨ Multiple alert positions (top-right, bottom-left, etc.)</li>
+                <li>🎨 Customizable themes and styles</li>
+                <li>⚡️ Lightweight and dependency-free</li>
+                <li>🔄 Loading state support</li>
+                <li>🎯 TypeScript support</li>
+                <li>📱 Responsive design</li>
+            </ul>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-bash.min.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
