@@ -13,3 +13,5 @@
 .env.test.local
 .tsconfig.json
 tsup.config.json
+tsconfig.json
+tsup.config.ts
