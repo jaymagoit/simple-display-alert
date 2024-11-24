@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Source files (since we publish dist)
+src/
+example/
+
+# Development files
+.git/
+.gitignore
+.vscode/
+.idea/
+tsconfig.json
+tsup.config.ts
+
+# Logs
+*.log
+npm-debug.log
+yarn-error.log
+
+# Test files
+test/
+tests/
+coverage/
+
+# Documentation (except README)
+docs/
