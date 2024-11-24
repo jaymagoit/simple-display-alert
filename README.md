@@ -18,12 +18,12 @@ npm install @jaymago/simple-display-alert
 - 🔄 Multiple alerts support
 - 🎯 TypeScript support
 
-## Basic Usage
+## Usage
 
-### Import
+### 1. Import the Package and Styles
 
-```ts
-// Importing alert functions
+```typescript
+// Import the package
 import { 
     displayAlert,          // Generic alert function
     displayAlertSuccess,   // Success variant
@@ -32,9 +32,12 @@ import {
     displayAlertInfo,      // Info variant
     displayAlertLoader     // Loading variant
 } from 'simple-display-alert';
+
+// Import the CSS (required)
+import '@jaymago/simple-display-alert/dist/index.css';
 ```
 
-### Simple Alerts
+### 2. Basic Usage
 
 ```ts
 // Success message (green)
@@ -51,6 +54,27 @@ displayAlertInfo('This is an informational message');
 
 // Loading message (with spinner)
 displayAlertLoader('Loading...');
+```
+
+### Examples
+
+```typescript
+// First, import both the functions and CSS
+import { displayAlert, displayAlertSuccess } from '@jaymago/simple-display-alert';
+import '@jaymago/simple-display-alert/dist/index.css';
+
+// Then use the alert functions
+displayAlertSuccess('Operation completed successfully!');
+
+displayAlert('Custom alert', {
+  type: 'info',
+  position: 'top-right',
+  timeout: 3000
+});
+
+// Multiple alerts
+displayAlert('First alert', { position: 'top-left' });
+displayAlert('Second alert', { position: 'top-right' });
 ```
 
 ### Alerts with Options

@@ -1,6 +1,6 @@
 {
   "name": "@jaymago/simple-display-alert",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight, customizable alert system for web applications with TypeScript support",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -37,7 +37,7 @@
   ],
   "author": {
     "name": "Jay Mago",
-    "email": "jaymago.it@gmail.com",
+    "email": "jaymago.desk@gmail.com",
     "url": "https://github.com/jaymagoit"
   },
   "license": "MIT",
