@@ -40,6 +40,8 @@ export function createAlertElement(
     props: DisplayAlertProps = {}
 ): HTMLDivElement {
     const div: any = document.createElement('div')
+    const alertPosition = props.position ?? 'bottom-right';
+
     div.classList = joinStrings(
         `fade alert alert-response-all alert-${variant} `,
         `${className || ''} `,
@@ -63,8 +65,9 @@ export function createAlertElement(
     // Remove alert when close btn is clicked.
     if (false !== props.closeBtn) {
         div.querySelector('.close').addEventListener('click', () => {
+            console.log(className)
             // Remove existing alerts.
-            removeResponseAlert(className, true)
+            removeResponseAlert(className, true, alertPosition)
 
             // Clear old timer for destoying alert.
             clearAlertTimeout(className)
