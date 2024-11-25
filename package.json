@@ -1,6 +1,6 @@
 {
   "name": "@jaymago/simple-display-alert",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A lightweight, customizable alert system for web applications with TypeScript support",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

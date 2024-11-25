@@ -65,7 +65,6 @@ export function createAlertElement(
     // Remove alert when close btn is clicked.
     if (false !== props.closeBtn) {
         div.querySelector('.close').addEventListener('click', () => {
-            console.log(className)
             // Remove existing alerts.
             removeResponseAlert(className, true, alertPosition)
 
